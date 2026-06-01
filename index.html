@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>jonny barber</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jony's Barber Shop | Ultra Premium Grooming</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --pure-white: #ffffff;
+            --off-white: #fafafa;
+            --light-gray: #f0f0f0;
+            --text-dark: #111111;
+            --text-light: #777777;
+            --gold-accent: #d4af37;
+            --gold-hover: #b5952f;
+            --shadow-subtle: 0 15px 40px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.08);
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* --- BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--pure-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        img { width: 100%; height: auto; display: block; }
+
+        /* --- REUSABLE UTILITIES --- */
+        .section-padding { padding: 120px 5%; }
+        .bg-off-white { background-color: var(--off-white); }
+        .text-center { text-align: center; }
+        .section-title { font-size: 3rem; margin-bottom: 15px; letter-spacing: -0.5px; }
+        .section-subtitle {
+            color: var(--gold-accent); font-size: 0.85rem; text-transform: uppercase;
+            letter-spacing: 3px; margin-bottom: 70px; display: block; font-weight: 500;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed; width: 100%; padding: 35px 5%; display: flex;
+            justify-content: space-between; align-items: center; z-index: 1000;
+            transition: var(--transition); background: transparent; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(15px);
+            padding: 20px 5%; box-shadow: var(--shadow-subtle); border-bottom: 1px solid var(--light-gray);
+        }
+        .logo { font-size: 1.6rem; font-family: 'Playfair Display', serif; letter-spacing: 2px; text-transform: uppercase; }
+        .logo span { color: var(--gold-accent); font-style: italic; }
+
+        /* --- BUTTONS --- */
+        .btn-gold {
+            background-color: var(--gold-accent); color: var(--pure-white);
+            padding: 14px 35px; font-size: 0.85rem; letter-spacing: 1.5px;
+            text-transform: uppercase; border: none; cursor: pointer;
+            transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .btn-gold::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        .btn-gold:hover::before { left: 100%; }
+        .btn-gold:hover { background-color: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
+
+        /* --- HERO SECTION (6-Image Slideshow) --- */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 0 5%; position: relative; background: var(--pure-white);
+        }
+        
+        .hero-slideshow {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+            background-color: var(--pure-white);
+        }
+
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            /* make hero images fully visible */
+            filter: none;
+            opacity: 0;
+            animation: crossfade 36s infinite ease-in-out;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* 6 images, each gets 6 seconds (36s total). Math: 100 / 6 = 16.66% per cycle */
+        @keyframes crossfade {
+            0% { opacity: 0; transform: scale(1); }
+            4% { opacity: 1; }
+            16% { opacity: 1; }
+            20% { opacity: 0; transform: scale(1.05); }
+            100% { opacity: 0; }
+        }
+
+        /* Slide Delays */
+        .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); animation-delay: 0s; }
+        .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); animation-delay: 6s; }
+        .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); animation-delay: 12s; }
+        .slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); animation-delay: 18s; }
+        .slide:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); animation-delay: 24s; }
+        .slide:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); animation-delay: 30s; }
+
+        .hero-content { position: relative; z-index: 1; max-width: 900px; }
+        .hero h1 { font-size: 5rem; margin-bottom: 25px; line-height: 1.1; }
+        .hero p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 45px; font-weight: 300; max-width: 600px; margin-inline: auto; }
+
+        /* --- ROTATING FRAME (15 images) --- */
+        .rotating-frame-section { padding: 60px 5%; display:flex; justify-content:center; align-items:center; }
+        .frame {
+            width: 420px; height: 420px; border-radius: 50%; position: relative; overflow: visible;
+            display:flex; align-items:center; justify-content:center; margin: 0 auto; 
+        }
+        .frame .orbit {
+            position: absolute; left: 50%; top: 50%; width: 700px; height: 700px; margin-left: -350px; margin-top: -350px;
+            transform-origin: center center; animation: spin 30s linear infinite;
+        }
+        @keyframes spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+        .orbit img {
+            position: absolute; left: 50%; top: 50%; transform-origin: center center; width: 96px; height: 96px; object-fit: cover;
+            border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); border: 4px solid var(--pure-white);
+            transition: transform 0.4s ease, box-shadow 0.3s ease;
+        }
+        .frame:hover .orbit { animation-play-state: paused; }
+        .orbit img:hover { transform: scale(1.12); box-shadow: 0 14px 30px rgba(0,0,0,0.18); }
+
+        /* --- THE EXPERIENCE --- */
+        .experience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1300px; margin: 0 auto; }
+        .step-card { padding: 40px 30px; background: var(--pure-white); border: 1px solid var(--light-gray); position: relative; transition: var(--transition); }
+        .step-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); border-color: transparent; }
+        .step-number { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--off-white); position: absolute; top: 10px; right: 20px; font-style: italic; font-weight: 600; text-shadow: -1px -1px 0 var(--gold-accent), 1px -1px 0 var(--gold-accent), -1px 1px 0 var(--gold-accent), 1px 1px 0 var(--gold-accent); opacity: 0.2; transition: var(--transition); }
+        .step-card:hover .step-number { opacity: 1; transform: scale(1.1); }
+        .step-card h3 { font-size: 1.4rem; margin-bottom: 15px; position: relative; z-index: 1; }
+        .step-card p { color: var(--text-light); font-size: 0.9rem; font-weight: 300; position: relative; z-index: 1; }
+
+        /* --- SERVICES SECTION --- */
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .service-card { background: var(--pure-white); padding: 60px 40px; text-align: center; border-bottom: 3px solid transparent; transition: var(--transition); box-shadow: var(--shadow-subtle); }
+        .service-card:hover { transform: translateY(-10px); border-bottom: 3px solid var(--gold-accent); box-shadow: var(--shadow-hover); }
+        .service-card h3 { font-size: 1.6rem; margin-bottom: 20px; }
+        .service-card p { color: var(--text-light); font-size: 0.95rem; font-weight: 300; }
+
+        /* --- THE ARTISANS --- */
+        .artisans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .artisan-card { position: relative; overflow: hidden; cursor: pointer; }
+        .artisan-img { height: 450px; object-fit: cover; filter: grayscale(100%); transition: var(--transition); }
+        .artisan-card:hover .artisan-img { filter: grayscale(0%); transform: scale(1.05); }
+        .artisan-info { position: absolute; bottom: -100px; left: 0; width: 100%; background: rgba(255,255,255,0.95); padding: 25px; text-align: center; transition: var(--transition); backdrop-filter: blur(5px); }
+        .artisan-card:hover .artisan-info { bottom: 0; }
+        .artisan-info h3 { font-size: 1.4rem; margin-bottom: 5px; }
+        .artisan-info span { color: var(--gold-accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- SIGNATURE LOOKBOOK --- */
+        .lookbook-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 300px; gap: 15px; max-width: 1400px; margin: 0 auto; }
+        .look-item { position: relative; overflow: hidden; }
+        .look-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); filter: brightness(0.9); }
+        .look-item:hover img { transform: scale(1.1); filter: brightness(0.6); }
+        .look-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
+        .look-item:hover .look-overlay { opacity: 1; }
+        .look-overlay span { color: var(--pure-white); font-family: 'Playfair Display', serif; font-size: 1.5rem; border: 1px solid var(--gold-accent); padding: 15px 30px; background: rgba(212, 175, 55, 0.2); backdrop-filter: blur(3px); }
+        .wide { grid-column: span 2; }
+        .tall { grid-row: span 2; }
+
+        /* --- CLIENT VOICES --- */
+        .testimonials { background: url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover fixed; position: relative; }
+        .testimonials::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.92); }
+        .testimonials-container { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+        .quote-card { background: var(--pure-white); padding: 50px; box-shadow: var(--shadow-subtle); position: relative; }
+        .quote-icon { font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--gold-accent); position: absolute; top: -10px; left: 30px; opacity: 0.3; line-height: 1; }
+        .quote-text { font-size: 1.1rem; font-style: italic; color: var(--text-dark); margin-bottom: 25px; position: relative; z-index: 1; }
+        .quote-author { font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- DETAILS / VISIT US --- */
+        .details-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 0; max-width: 1200px; margin: 0 auto; background: var(--pure-white); box-shadow: var(--shadow-hover); }
+        .details-info { padding: 80px 60px; background: var(--pure-white); }
+        .details-map { background: var(--light-gray); min-height: 400px; position: relative; }
+        .info-block { margin-bottom: 40px; }
+        .info-block h4 { font-size: 1.3rem; margin-bottom: 12px; color: var(--gold-accent); }
+        .info-block p { color: var(--text-light); font-weight: 300; }
+        .notice { background: var(--text-dark); color: var(--gold-accent); padding: 20px; text-align: center; font-size: 0.85rem; letter-spacing: 2px; font-weight: 500; }
+
+        /* --- DETAILED FOOTER --- */
+        footer {
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            padding: 100px 5% 30px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr 1.5fr;
+            gap: 50px;
+            max-width: 1300px;
+            margin: 0 auto;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background-color: var(--gold-accent);
+        }
+
+        /* Brand Column */
+        .footer-brand .footer-logo {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .footer-brand .footer-logo span { color: var(--gold-accent); font-style: italic; }
+        .footer-brand p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 25px; max-width: 300px; }
+        
+        /* Social Icons */
+        .social-links { display: flex; gap: 15px; }
+        .social-icon {
+            width: 40px; height: 40px;
+            border: 1px solid var(--light-gray);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        .social-icon:hover { background-color: var(--gold-accent); color: var(--pure-white); border-color: var(--gold-accent); }
+        .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* Link & Contact Columns */
+        .footer-links ul, .footer-contact ul { list-style: none; }
+        .footer-links li, .footer-contact li { margin-bottom: 12px; }
+        .footer-links a { color: var(--text-light); font-size: 0.95rem; }
+        .footer-links a:hover { color: var(--gold-accent); padding-left: 5px; }
+        .footer-contact li { color: var(--text-light); font-size: 0.95rem; display: flex; align-items: flex-start; gap: 10px; }
+        
+        /* Newsletter Column */
+        .newsletter p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 20px; }
+        .newsletter-form { display: flex; border-bottom: 1px solid var(--text-dark); padding-bottom: 5px; }
+        .newsletter-form input {
+            background: transparent; border: none; outline: none;
+            padding: 10px 0; width: 100%; color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+        }
+        .newsletter-form input::placeholder { color: #aaa; }
+        .newsletter-form button {
+            background: transparent; border: none; cursor: pointer;
+            color: var(--gold-accent); font-weight: 600; font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        .newsletter-form button:hover { color: var(--text-dark); }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            max-width: 1300px; margin: 0 auto;
+            padding-top: 30px; border-top: 1px solid var(--light-gray);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 20px;
+        }
+        .footer-bottom p { color: var(--text-light); font-size: 0.85rem; }
+        .footer-legal a { color: var(--text-light); font-size: 0.85rem; margin-left: 20px; }
+        .footer-legal a:hover { color: var(--gold-accent); }
+
+        /* --- ANIMATIONS --- */
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; } .delay-4 { transition-delay: 0.4s; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .experience-grid, .services-grid, .artisans-grid { grid-template-columns: repeat(2, 1fr); }
+            .lookbook-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-container, .details-container { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .experience-grid, .services-grid, .artisans-grid { grid-template-columns: 1fr; }
+            .look-item.wide, .look-item.tall { grid-column: span 1; grid-row: span 1; }
+            .section-padding { padding: 80px 5%; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">Jony's <span>Barber</span></div>
+        <button class="btn-gold">Book Appointment</button>
+    </nav>
+
+    <!-- Hero Section with 6-Image Crossfade Slideshow -->
+    <section class="hero">
+        <div class="hero-slideshow">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <div class="hero-content fade-in">
+            <h1>Mastery in Every Detail.</h1>
+            <p>A chill, highly professional atmosphere where artistry meets tradition. Experience Chicago's elite standard in men's grooming.</p>
+            <button class="btn-gold">Discover Excellence</button>
+        </div>
+    </section>
+
+    <!-- Rotating Frame: 15 Images -->
+    <section class="rotating-frame-section">
+        <div class="frame" aria-hidden="false">
+            <div class="orbit" id="orbit"></div>
+        </div>
+    </section>
+
+    <!-- 1. The Experience (Process) -->
+    <section class="section-padding bg-off-white text-center">
+        <h2 class="section-title fade-in">The Grooming Ritual</h2>
+        <span class="section-subtitle fade-in">How We Operate</span>
+        
+        <div class="experience-grid">
+            <div class="step-card fade-in delay-1">
+                <div class="step-number">01</div>
+                <h3>Consultation</h3>
+                <p>We begin by understanding your head shape, hair texture, and personal style goals to design the perfect cut.</p>
+            </div>
+            <div class="step-card fade-in delay-2">
+                <div class="step-number">02</div>
+                <h3>Preparation</h3>
+                <p>Relax with premium pre-shave oils, hot steam towels, and scalp treatments that prepare the canvas.</p>
+            </div>
+            <div class="step-card fade-in delay-3">
+                <div class="step-number">03</div>
+                <h3>Execution</h3>
+                <p>Flawless shear work, precise clippering, and straight-razor detailing executed with absolute focus.</p>
+            </div>
+            <div class="step-card fade-in delay-4">
+                <div class="step-number">04</div>
+                <h3>The Finish</h3>
+                <p>Professional styling, beard conditioning, and a splash of luxury aftershave to complete the look.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Services Section -->
+    <section class="section-padding text-center">
+        <h2 class="section-title fade-in">Our Specialties</h2>
+        <span class="section-subtitle fade-in">Uncompromising Quality</span>
+        
+        <div class="services-grid">
+            <div class="service-card fade-in delay-1">
+                <h3>Precise Fades</h3>
+                <p>Seamless skin fades and sharp line-ups tailored to elevate your natural profile. Executed with surgical precision.</p>
+            </div>
+            <div class="service-card fade-in delay-2">
+                <h3>Clean Looks</h3>
+                <p>Classic scissor cuts and modern texturizing for a sophisticated, executive finish that holds its shape for weeks.</p>
+            </div>
+            <div class="service-card fade-in delay-3">
+                <h3>Detailed Beards</h3>
+                <p>Sculpting, fading, and hot-towel straight-razor detailing to keep your facial hair looking intentional and sharp.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. The Artisans (Team) -->
+    <section class="section-padding bg-off-white text-center">
+        <h2 class="section-title fade-in">The Master Barbers</h2>
+        <span class="section-subtitle fade-in">Pride in Our Craft</span>
+
+        <div class="artisans-grid">
+            <div class="artisan-card fade-in delay-1">
+                <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Master Barber" class="artisan-img">
+                <div class="artisan-info">
+                    <h3>Marcus</h3>
+                    <span>Senior Stylist</span>
+                </div>
+            </div>
+            <div class="artisan-card fade-in delay-2">
+                <img src="https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Master Barber" class="artisan-img">
+                <div class="artisan-info">
+                    <h3>Jony</h3>
+                    <span>Founder & Master Barber</span>
+                </div>
+            </div>
+            <div class="artisan-card fade-in delay-3">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Master Barber" class="artisan-img">
+                <div class="artisan-info">
+                    <h3>David</h3>
+                    <span>Fade Specialist</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Signature Lookbook (Gallery) -->
+    <section class="section-padding text-center">
+        <h2 class="section-title fade-in">Signature Lookbook</h2>
+        <span class="section-subtitle fade-in">Our Portfolio</span>
+
+        <div class="lookbook-grid">
+            <div class="look-item tall fade-in delay-1">
+                <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Haircut Style">
+                <div class="look-overlay"><span>The Executive</span></div>
+            </div>
+            <div class="look-item wide fade-in delay-2">
+                <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Haircut Style">
+                <div class="look-overlay"><span>Skin Fade</span></div>
+            </div>
+            <div class="look-item fade-in delay-3">
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Haircut Style">
+                <div class="look-overlay"><span>Texture</span></div>
+            </div>
+            <div class="look-item fade-in delay-1">
+                <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Haircut Style">
+                <div class="look-overlay"><span>Beard Trim</span></div>
+            </div>
+            <div class="look-item wide fade-in delay-2">
+                <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Barber Tools">
+                <div class="look-overlay"><span>Straight Razor</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Client Voices (Testimonials) -->
+    <section class="section-padding testimonials text-center">
+        <h2 class="section-title fade-in" style="position: relative; z-index: 1;">Client Voices</h2>
+        <span class="section-subtitle fade-in" style="position: relative; z-index: 1;">The Word on the Street</span>
+
+        <div class="testimonials-container">
+            <div class="quote-card fade-in delay-1">
+                <div class="quote-icon">"</div>
+                <p class="quote-text">A chill, solid, and highly professional atmosphere. You can tell they take a massive amount of pride in their work. Best fade I've had in Chicago.</p>
+                <div class="quote-author">— Michael T.</div>
+            </div>
+            <div class="quote-card fade-in delay-2">
+                <div class="quote-icon">"</div>
+                <p class="quote-text">Outstanding service and affordable prices without sacrificing the premium feel. They consistently deliver sharp, stylish cuts every single time.</p>
+                <div class="quote-author">— James R.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Details / Visit Us -->
+    <section class="section-padding bg-off-white">
+        <div class="details-container fade-in">
+            <div class="details-info">
+                <h2 class="section-title" style="margin-bottom: 40px;">Visit Us</h2>
+                
+                <div class="info-block">
+                    <h4>Location</h4>
+                    <p>539 W 31st St<br>Chicago, IL 60616</p>
+                </div>
+                
+                <div class="info-block">
+                    <h4>Hours of Operation</h4>
+                    <p><strong>Mon - Sat:</strong> 8:00 AM - 7:00 PM</p>
+                    <p><strong>Sunday:</strong> 8:00 AM - 4:00 PM</p>
+                </div>
+
+                <div class="info-block">
+                    <h4>Atmosphere & Amenities</h4>
+                    <p>Kid-friendly environment. Public restrooms available.<br><em style="font-size: 0.85rem;">*Wheelchair-accessible parking currently unavailable.</em></p>
+                </div>
+                
+                <div class="notice">
+                    PLEASE NOTE: WE ARE A CASH ONLY ESTABLISHMENT
+                </div>
+            </div>
+            
+            <div class="details-map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2972.247854657155!2d-87.64326168456002!3d41.83803877922572!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2c086895ba7f%3A0x48e385054b996748!2s539%20W%2031st%20St%2C%20Chicago%2C%20IL%2060616!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus" 
+                    width="100%" height="100%" style="border:0; position:absolute; top:0; left:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Premium Footer -->
+    <footer>
+        <div class="footer-grid">
+            
+            <!-- Brand Column -->
+            <div class="footer-col footer-brand">
+                <div class="footer-logo">Jony's <span>Barber</span></div>
+                <p>Chicago’s finest destination for men's grooming, offering a precise, professional, and entirely tailored experience.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-col footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#">The Experience</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">The Artisans</a></li>
+                    <li><a href="#">Lookbook</a></li>
+                    <li><a href="#">Client Voices</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col footer-contact">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>
+                        <strong style="color: var(--text-dark);">A:</strong> 
+                        539 W 31st St, Chicago, IL 60616
+                    </li>
+                    <li>
+                        <strong style="color: var(--text-dark);">P:</strong> 
+                        (312) 555-0198
+                    </li>
+                    <li>
+                        <strong style="color: var(--text-dark);">E:</strong> 
+                        hello@jonysbarber.com
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="footer-col newsletter">
+                <h4>Stay Sharp</h4>
+                <p>Subscribe to our newsletter for style tips, exclusive offers, and VIP booking access.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 Jony's Barber Shop. All Rights Reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Booking Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Navbar glass effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for staggered scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Stop observing once it has animated in
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        fadeElements.forEach(el => {
+            appearOnScroll.observe(el);
+        });
+
+        // Rotating frame: create 15 orbiting images
+        (function() {
+            const orbit = document.getElementById('orbit');
+            if (!orbit) return;
+
+            const images = [
+                'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1605497788044-5a32c7078486?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1573497491208-6b1acb260507?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1544739313-6d3a4b0f2459?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+            ];
+
+            function buildOrbit() {
+                orbit.innerHTML = '';
+                const size = Math.min(orbit.offsetWidth, orbit.offsetHeight);
+                const radius = Math.max(120, Math.round(size / 2) - 120);
+                images.forEach((src, i) => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = `Look ${i+1}`;
+                    const angle = (i / images.length) * 360;
+                    img.style.transform = `rotate(${angle}deg) translate(${radius}px) rotate(-${angle}deg)`;
+                    orbit.appendChild(img);
+                });
+            }
+
+            // Build once DOM sizes are available
+            buildOrbit();
+            // Rebuild on resize for responsive radius
+            window.addEventListener('resize', () => {
+                buildOrbit();
+            });
+        })();
+    </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
